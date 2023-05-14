@@ -70,7 +70,25 @@ export default function Home(props: HomeProps) {
 
         {trimmedText !== "" && (
           <div>
-            <Image src={imageSrc} width={1200} height={630} alt={trimmedText} />
+            <div>
+              <a
+                href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                  `${origin}/?t=${encodeURIComponent(trimmedText)}`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Share on Twitter
+              </a>
+            </div>
+            <div>
+              <Image
+                src={imageSrc}
+                width={1200}
+                height={630}
+                alt={trimmedText}
+              />
+            </div>
           </div>
         )}
       </div>
