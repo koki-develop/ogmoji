@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -17,8 +17,8 @@ type HomeProps = {
 export default function Home(props: HomeProps) {
   const router = useRouter();
 
-  const [text, setText] = React.useState(props.text);
-  const trimmedText = useMemo(() => text.trim(), [text]);
+  const [text, setText] = useState(props.text);
+  const [trimmedText, setTrimmedText] = useState(text.trim());
 
   const ogImageUrl = useMemo(() => {
     const url = new URL("/api/v1/og", origin);
@@ -31,11 +31,18 @@ export default function Home(props: HomeProps) {
   }, [ogImageUrl]);
 
   const handleChangeText = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setText(e.target.value);
     },
     []
   );
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTrimmedText(text.trim());
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [text]);
 
   useEffect(() => {
     const query = trimmedText === "" ? undefined : { t: trimmedText };
@@ -46,7 +53,7 @@ export default function Home(props: HomeProps) {
 
   return (
     <main className={inter.className}>
-      <input type="text" value={text} onChange={handleChangeText} />
+      <textarea value={text} onChange={handleChangeText} />
 
       {trimmedText !== "" && (
         <Image src={imageSrc} width={1200} height={630} alt={trimmedText} />
