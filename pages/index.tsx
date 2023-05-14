@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import { NextSeo } from "next-seo";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -104,6 +105,23 @@ export default function Home({ defaultText }: HomeProps) {
 
   return (
     <Layout>
+      <NextSeo
+        twitter={{ cardType: "summary_large_image" }}
+        openGraph={{
+          description: trimmedText,
+          images: [
+            {
+              url: ogImageUrl.href,
+              secureUrl: ogImageUrl.href,
+              width: 1200,
+              height: 630,
+              type: "image/png",
+            },
+          ],
+          site_name: "OGmoji",
+        }}
+      />
+
       <main className="p-4 container gap-4 flex flex-col">
         <div>
           <textarea
