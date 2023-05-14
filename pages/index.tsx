@@ -19,7 +19,7 @@ export default function Home(props: HomeProps) {
   const router = useRouter();
 
   const [text, setText] = useState(props.text);
-  const [trimmedText, setTrimmedText] = useState(text.trim());
+  const trimmedText = useMemo(() => text.trim(), [text]);
 
   const ogImageUrl = useMemo(() => {
     const url = new URL("/api/v1/og", origin);
@@ -27,9 +27,9 @@ export default function Home(props: HomeProps) {
     return url;
   }, [trimmedText]);
 
-  const imageSrc = useMemo(() => {
-    return ogImageUrl.pathname + ogImageUrl.search;
-  }, [ogImageUrl]);
+  const [imageSrc, setImageSrc] = useState(
+    ogImageUrl.pathname + ogImageUrl.search
+  );
 
   const handleChangeText = useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -40,10 +40,10 @@ export default function Home(props: HomeProps) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setTrimmedText(text.trim());
+      setImageSrc(ogImageUrl.pathname + ogImageUrl.search);
     }, 250);
     return () => clearTimeout(timer);
-  }, [text]);
+  }, [ogImageUrl.pathname, ogImageUrl.search]);
 
   useEffect(() => {
     const query = trimmedText === "" ? undefined : { t: trimmedText };
