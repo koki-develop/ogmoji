@@ -32,6 +32,12 @@ export default function Home(props: HomeProps) {
     ogImageUrl.pathname + ogImageUrl.search
   );
 
+  const encodedShareUrl = useMemo(() => {
+    const url = new URL(origin);
+    url.searchParams.set("t", trimmedText);
+    return encodeURIComponent(url.href);
+  }, [trimmedText]);
+
   const handleChangeText = useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       setText(e.target.value);
@@ -80,9 +86,7 @@ export default function Home(props: HomeProps) {
           <div>
             <div>
               <a
-                href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
-                  `${origin}/?t=${encodeURIComponent(trimmedText)}`
-                )}`}
+                href={`https://twitter.com/intent/tweet?url=${encodedShareUrl}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
