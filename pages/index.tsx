@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { SiFacebook, SiGithub, SiTwitter } from "react-icons/si";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -59,9 +60,12 @@ export default function Home(props: HomeProps) {
         "flex flex-col items-center bg-[#eefbff] min-h-screen"
       )}
     >
+      {/* HEADER */}
       <header className="bg-white flex w-full justify-center p-2 items-center mb-4 shadow-md">
         <h1 className="text-center text-xl">OGmoji</h1>
       </header>
+
+      {/* MAIN */}
       <main className="p-4 container">
         <div>
           <textarea
@@ -96,6 +100,19 @@ export default function Home(props: HomeProps) {
           </div>
         )}
       </main>
+
+      {/* FOOTER */}
+      <footer className="flex flex-col items-center gap-4">
+        <p>&copy; 2023 Koki Sato</p>
+        <a
+          className="text-3xl"
+          href="https://github.com/koki-develop/ogmoji"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <SiGithub />
+        </a>
+      </footer>
     </div>
   );
 }
