@@ -33,7 +33,7 @@ export default async function GET(request: Request) {
             color: "black",
             display: "flex",
             flex: 1,
-            fontSize: 40,
+            fontSize: 64,
             justifyContent: "center",
             padding: "16px",
             whiteSpace: "pre-wrap",
