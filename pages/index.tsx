@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import classNames from "classnames";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,12 +53,27 @@ export default function Home(props: HomeProps) {
   }, [trimmedText]);
 
   return (
-    <main className={inter.className}>
-      <textarea value={text} onChange={handleChangeText} />
+    <main
+      className={classNames(inter.className, "flex flex-col items-center p-4")}
+    >
+      <div className="container">
+        <h1 className="mb-4 text-center text-xl">OGmoji</h1>
 
-      {trimmedText !== "" && (
-        <Image src={imageSrc} width={1200} height={630} alt={trimmedText} />
-      )}
+        <div>
+          <textarea
+            className="block w-full rounded-md border border-gray-300 p-2 outline-none"
+            rows={4}
+            value={text}
+            onChange={handleChangeText}
+          />
+        </div>
+
+        {trimmedText !== "" && (
+          <div>
+            <Image src={imageSrc} width={1200} height={630} alt={trimmedText} />
+          </div>
+        )}
+      </div>
     </main>
   );
 }
