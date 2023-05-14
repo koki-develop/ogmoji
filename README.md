@@ -1,6 +1,6 @@
 # OGmoji
 
-[ogmoji.vercel.app](https://ogmoji.verce.app)
+[ogmoji.vercel.app](https://ogmoji.vercel.app)
 
 # LICENSE
 
