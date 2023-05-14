@@ -12,14 +12,56 @@ const origin =
     ? "https://ogmoji.vercel.app"
     : "http://localhost:3000";
 
-type HomeProps = {
-  text: string;
+type LayoutProps = {
+  children: React.ReactNode;
 };
 
-export default function Home(props: HomeProps) {
+function Layout({ children }: LayoutProps) {
+  return (
+    <div
+      className={classNames(
+        inter.className,
+        "flex flex-col items-center bg-[#eefbff] min-h-screen gap-4"
+      )}
+    >
+      <Header />
+      {children}
+      <Footer />
+    </div>
+  );
+}
+
+function Header() {
+  return (
+    <header className="bg-white flex w-full justify-center py-4 items-center shadow-md">
+      <h1 className="text-center text-xl">OGmoji</h1>
+    </header>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="flex flex-col items-center gap-4 pb-8">
+      <p>&copy; 2023 Koki Sato</p>
+      <a
+        href="https://github.com/koki-develop/ogmoji"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <SiGithub fontSize={32} />
+      </a>
+    </footer>
+  );
+}
+
+type HomeProps = {
+  defaultText: string;
+};
+
+export default function Home({ defaultText }: HomeProps) {
   const router = useRouter();
 
-  const [text, setText] = useState(props.text);
+  const [text, setText] = useState(defaultText);
   const trimmedText = useMemo(() => text.trim(), [text]);
 
   const ogImageUrl = useMemo(() => {
@@ -60,18 +102,7 @@ export default function Home(props: HomeProps) {
   }, [trimmedText]);
 
   return (
-    <div
-      className={classNames(
-        inter.className,
-        "flex flex-col items-center bg-[#eefbff] min-h-screen gap-4"
-      )}
-    >
-      {/* HEADER */}
-      <header className="bg-white flex w-full justify-center p-2 items-center shadow-md">
-        <h1 className="text-center text-xl">OGmoji</h1>
-      </header>
-
-      {/* MAIN */}
+    <Layout>
       <main className="p-4 container gap-4 flex flex-col">
         <div>
           <textarea
@@ -118,26 +149,14 @@ export default function Home(props: HomeProps) {
           </div>
         )}
       </main>
-
-      {/* FOOTER */}
-      <footer className="flex flex-col items-center gap-4 pb-8">
-        <p>&copy; 2023 Koki Sato</p>
-        <a
-          href="https://github.com/koki-develop/ogmoji"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <SiGithub fontSize={32} />
-        </a>
-      </footer>
-    </div>
+    </Layout>
   );
 }
 
 export function getServerSideProps({ query }: { query: { t?: string } }) {
   return {
     props: {
-      text: query.t ?? "",
+      defaultText: query.t ?? "",
     },
   };
 }
