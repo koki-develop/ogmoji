@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 const origin =
   process.env.NODE_ENV === "production"
-    ? "https://example.com"
+    ? "https://ogmoji.vercel.app"
     : "http://localhost:3000";
 
 type HomeProps = {
