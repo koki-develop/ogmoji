@@ -63,19 +63,19 @@ export default function Home(props: HomeProps) {
     <div
       className={classNames(
         inter.className,
-        "flex flex-col items-center bg-[#eefbff] min-h-screen"
+        "flex flex-col items-center bg-[#eefbff] min-h-screen gap-4"
       )}
     >
       {/* HEADER */}
-      <header className="bg-white flex w-full justify-center p-2 items-center mb-4 shadow-md">
+      <header className="bg-white flex w-full justify-center p-2 items-center shadow-md">
         <h1 className="text-center text-xl">OGmoji</h1>
       </header>
 
       {/* MAIN */}
-      <main className="p-4 container">
+      <main className="p-4 container gap-4 flex flex-col">
         <div>
           <textarea
-            className="block w-full rounded-md shadow-md border border-gray-100 p-2 outline-none"
+            className="block w-full rounded shadow-md border border-gray-100 p-2 outline-none"
             rows={4}
             value={text}
             onChange={handleChangeText}
@@ -83,16 +83,30 @@ export default function Home(props: HomeProps) {
         </div>
 
         {trimmedText !== "" && (
-          <div>
-            <div>
+          <div className="flex flex-col gap-4">
+            {/* SHARE */}
+            <div className="flex gap-2">
               <a
+                className="bg-[#1DA1F2] block rounded text-white flex items-center gap-2 py-2 px-4 shadow-md"
                 href={`https://twitter.com/intent/tweet?url=${encodedShareUrl}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Share on Twitter
+                <SiTwitter fontSize={24} />
+                Twitter
+              </a>
+              <a
+                className="bg-[#1877F2] block rounded text-white flex items-center gap-2 py-2 px-4 shadow-md"
+                href={`http://www.facebook.com/share.php?u=${encodedShareUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <SiFacebook fontSize={24} />
+                Facebook
               </a>
             </div>
+
+            {/* PREVIEW */}
             <div>
               <Image
                 src={imageSrc}
@@ -106,15 +120,14 @@ export default function Home(props: HomeProps) {
       </main>
 
       {/* FOOTER */}
-      <footer className="flex flex-col items-center gap-4">
+      <footer className="flex flex-col items-center gap-4 pb-8">
         <p>&copy; 2023 Koki Sato</p>
         <a
-          className="text-3xl"
           href="https://github.com/koki-develop/ogmoji"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <SiGithub />
+          <SiGithub fontSize={32} />
         </a>
       </footer>
     </div>

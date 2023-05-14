@@ -27,7 +27,7 @@ export default async function GET(request: Request) {
             alignItems: "center",
             background: "white",
             border: "1px solid rgb(243 244 246)", // border border-gray-100
-            borderRadius: "6px", // rounded-md
+            borderRadius: "4px", // rounded
             boxShadow:
               "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)", // shadow-md
             color: "black",
