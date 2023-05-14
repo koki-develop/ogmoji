@@ -53,15 +53,19 @@ export default function Home(props: HomeProps) {
   }, [trimmedText]);
 
   return (
-    <main
-      className={classNames(inter.className, "flex flex-col items-center p-4")}
+    <div
+      className={classNames(
+        inter.className,
+        "flex flex-col items-center bg-[#eefbff] min-h-screen"
+      )}
     >
-      <div className="container">
-        <h1 className="mb-4 text-center text-xl">OGmoji</h1>
-
+      <header className="bg-white flex w-full justify-center p-2 items-center mb-4 shadow-md">
+        <h1 className="text-center text-xl">OGmoji</h1>
+      </header>
+      <main className="p-4 container">
         <div>
           <textarea
-            className="block w-full rounded-md border border-gray-300 p-2 outline-none"
+            className="block w-full rounded-md shadow-md border border-gray-100 p-2 outline-none"
             rows={4}
             value={text}
             onChange={handleChangeText}
@@ -91,8 +95,8 @@ export default function Home(props: HomeProps) {
             </div>
           </div>
         )}
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }
 

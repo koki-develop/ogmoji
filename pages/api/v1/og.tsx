@@ -15,19 +15,32 @@ export default async function GET(request: Request) {
     (
       <div
         style={{
-          fontSize: 40,
-          color: "black",
-          background: "white",
-          width: "100%",
-          height: "100%",
-          padding: "50px 200px",
-          justifyContent: "center",
-          alignItems: "center",
+          backgroundColor: "#eefbff",
           display: "flex",
-          whiteSpace: "pre-wrap",
+          height: "100%",
+          padding: "32px",
+          width: "100%",
         }}
       >
-        {t}
+        <div
+          style={{
+            alignItems: "center",
+            background: "white",
+            border: "1px solid rgb(243 244 246)", // border border-gray-100
+            borderRadius: "6px", // rounded-md
+            boxShadow:
+              "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)", // shadow-md
+            color: "black",
+            display: "flex",
+            flex: 1,
+            fontSize: 40,
+            justifyContent: "center",
+            padding: "16px",
+            whiteSpace: "pre-wrap",
+          }}
+        >
+          {t}
+        </div>
       </div>
     ),
     {
