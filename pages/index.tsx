@@ -62,7 +62,7 @@ export default function Home({ defaultText }: HomeProps) {
   const router = useRouter();
 
   const [text, setText] = useState(defaultText);
-  const trimmedText = useMemo(() => text.trim(), [text]);
+  const [trimmedText, setTrimmedText] = useState(defaultText.trim());
 
   const ogImageUrl = useMemo(() => {
     const url = new URL("/api/v1/og", origin);
@@ -70,8 +70,9 @@ export default function Home({ defaultText }: HomeProps) {
     return url;
   }, [trimmedText]);
 
-  const [imageSrc, setImageSrc] = useState(
-    ogImageUrl.pathname + ogImageUrl.search
+  const imageSrc = useMemo(
+    () => ogImageUrl.pathname + ogImageUrl.search,
+    [ogImageUrl.pathname, ogImageUrl.search]
   );
 
   const encodedShareUrl = useMemo(() => {
@@ -89,10 +90,10 @@ export default function Home({ defaultText }: HomeProps) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setImageSrc(ogImageUrl.pathname + ogImageUrl.search);
+      setTrimmedText(text.trim());
     }, 250);
     return () => clearTimeout(timer);
-  }, [ogImageUrl.pathname, ogImageUrl.search]);
+  }, [text]);
 
   useEffect(() => {
     const query = trimmedText === "" ? undefined : { t: trimmedText };
